@@ -12,7 +12,6 @@ import { filter } from '../../../../node_modules/rxjs/operators';
 import { SharedMapServiceService } from '../../components/map/services/shared-map-service.service';
 let filter2: boolean, sim_fpop: any, sim_route_fpop: any, sim_fpop2: any;
 export type MapImageData = HTMLImageElement | ImageData | { width: number, height: number, data: Uint8Array | Uint8ClampedArray };
-
 export interface MapImageOptions {
   pixelRatio: number;
   sdf: boolean;
