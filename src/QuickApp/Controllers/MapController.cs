@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Elasticsearch.Net;
 using Nest;
 using System.Reflection;
+using CrystalDecisions.CrystalReports.Engine;
 
 
 namespace MOI.AssetManagement.Controllers {
@@ -100,7 +101,7 @@ namespace MOI.AssetManagement.Controllers {
 
         private string GetPath(string filename)
         {
-            string path = "G:\\Thabeet\\ThaabetImo\\src\\QuickApp\\ClientApp\\src\\app\\assets\\uploads\\";
+            string path = "G:\\Thabeet\\BackUpThabeetIMO\\src\\QuickApp\\ClientApp\\src\\assets\\uploads\\";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -153,7 +154,15 @@ namespace MOI.AssetManagement.Controllers {
         public string PrintDtls(String w_clause)
         {
             String rptname = "";
-            return "/Attachments/" + rptname;
+            ReportDocument rd = new ReportDocument();
+            rd.Load("G:\\Thabeet\\BackUpThabeetIMO\\src\\QuickApp\\CrystalReports\\Report1.Rpt");
+
+            rd.SetDataSource(GetDriverQuery(""));
+
+            //Response.Buffer = false;
+            //Response.ClearContent();
+            //Response.ClearHeaders();
+            return "/assets/Attachments/" + rptname;
         }
         #region Connection string to connect with Elasticsearch  
 

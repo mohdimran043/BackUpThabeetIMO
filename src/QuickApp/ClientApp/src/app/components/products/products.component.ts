@@ -131,7 +131,7 @@ CallUpload()
     loadData() {
         this.alertService.startLoadingMessage();
         this.loadingIndicator = true;
-        /*this.someSharedService.getLatLng().subscribe(resp =>
+        this.someSharedService.getLatLng().subscribe(resp =>
             {
                 this.alertService.stopLoadingMessage();
                 this.loadingIndicator = false;
@@ -147,8 +147,8 @@ CallUpload()
             });
 
 
-    }*/
-    this.someSharedService.getElasticQuery().subscribe(resp => {
+    }
+    /*this.someSharedService.getElasticQuery().subscribe(resp => {
       this.alertService.stopLoadingMessage();
       this.loadingIndicator = false;
       this.rows = JSON.parse(resp);
@@ -161,7 +161,7 @@ CallUpload()
         this.alertService.showStickyMessage("Load Error", `Unable to retrieve roles from the server.\r\nErrors: "${Utilities.getHttpResponseMessage(error)}"`,
           MessageSeverity.error, error);
       });
-
+      */
 
   }
 
