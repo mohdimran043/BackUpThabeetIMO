@@ -80,8 +80,11 @@ const URL = 'http://localhost:64430/api/map';
     this.selectedfile = e.target.files;
 }
 
-  editRole() {
-    this.driverobj.name = 'Rameez2';
+  editRole(row:driver) {
+    this.driverobj.name = row.name;
+    this.driverobj.idnumber = row.idnumber;
+    this.driverobj.empnumber = row.empnumber;
+    this.driverobj.telnumber = row.telnumber;
     //this.drvdtlpopup.myform.controls['email'].setValue('rameez');
     this.drvdtlpopup.driverobj = this.driverobj;
     this.editorModal.show();
@@ -147,7 +150,7 @@ CallUpload()
             });
 
 
-    }
+    
     /*this.someSharedService.getElasticQuery().subscribe(resp => {
       this.alertService.stopLoadingMessage();
       this.loadingIndicator = false;

@@ -29,15 +29,13 @@ namespace MOI.AssetManagement.Controllers {
         public int Height { get; set; }
     }
 
-    public class DriverInfo
+    public class Driver
     {
-        
-        public string drivername { get; set; }
-        public string IDNumber { get; set; }
-        public string TelNumber { get; set; }
-        public string EmpNumber { get; set; }
 
-        public string DCardNumber { get; set; }
+        public string name { get; set; }
+        public string idnumber { get; set; }
+        public string telnumber { get; set; }
+        public string empNumber { get; set; }
 
 
     }
@@ -81,6 +79,24 @@ namespace MOI.AssetManagement.Controllers {
           //  List <DriverInfo> = new List<DriverInfo>;
 
             return dt;
+        }
+
+        [HttpPost("SaveDriverDtl")]
+        public string PostSaveData([FromBody] Driver dcls)
+        {
+            SqlConnection cont = new SqlConnection();
+            cont.ConnectionString = constr2;
+            cont.Open();
+            DataTable dt = new DataTable();
+            //SqlDataAdapter da = new SqlDataAdapter("select * from driverinfo " + HttpUtility.HtmlDecode(w_clause), cont);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cont;
+            cmd.CommandText = " update driverinfo set idnumber='" + dcls.idnumber + "' ,telnumber='" + dcls.telnumber + "' where name='" + dcls.name + "'";
+            cmd.ExecuteNonQuery();
+            //da.Fill(dt);
+            cont.Close();
+            cont.Dispose();
+            return "Saved Successfully";
         }
 
         [HttpPost]
@@ -134,16 +150,16 @@ namespace MOI.AssetManagement.Controllers {
             SearchRequest esserach = new SearchRequest();
             esserach.Query = ContQry;
             
-            SearchDescriptor<DriverInfo> esdesct = new SearchDescriptor<DriverInfo>();
+            SearchDescriptor<Driver> esdesct = new SearchDescriptor<Driver>();
 
            
 
            // var esresponse = new SearchResponse<DriverInfo>();
-           var esresponse = es.Search<DriverInfo>(esserach);
+           var esresponse = es.Search<Driver>(esserach);
             DataTable dt = new DataTable();
             if (esresponse.Documents.Count > 0)
                 {
-                dt = ListToDataTable<DriverInfo>(esresponse.Documents.ToList());
+                dt = ListToDataTable<Driver>(esresponse.Documents.ToList());
                 }
             
             

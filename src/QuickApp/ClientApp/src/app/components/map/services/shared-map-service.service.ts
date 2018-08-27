@@ -7,6 +7,7 @@ import { catchError, retry, map, tap } from 'rxjs/operators';
 import { encodeUriFragment } from '../../../../../node_modules/@angular/router/src/url_tree';
 import { AppComponent } from '../../app.component';
 import * as appmode from '../../../app.module';
+import { driver } from '../../products/drivercls';
 export class Qrystring{
   public Qry:string = encodeURI("SELECT * from driverinfo")
 }
@@ -76,6 +77,11 @@ export class SharedMapServiceService {
 
   }
 
+  public Savedrivers(frm: driver) {
+    console.log('savedrivers' + frm);
+    return this.http.post(this.api_url + "/SaveDriverDtl", frm, { responseType: 'text' });
+  }
+
   public getElasticQuery() {
     return this.http.get(this.api_url + "/DriverElastic?w_clause=" + encodeURI("where 1=1 "), { responseType: 'text' });
   }
@@ -83,7 +89,7 @@ export class SharedMapServiceService {
   public UploadFiles(frm:FormData)
   {
 
-     return this.http.post(this.api_url ,frm, {responseType: 'text'});
+    return this.http.post(this.api_url  ,frm, {responseType: 'text'});
 
 
   }
